@@ -1,0 +1,20 @@
+.btn {
+    background-color: green;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.pink {
+    background-color: pink;
+}

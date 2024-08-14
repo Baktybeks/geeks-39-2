@@ -10,30 +10,11 @@ const TodoPage = () => {
     const [ inputValue, setInputValue ] = useState('');
     const [ todoList, setTodoList ] = useState([]);
 
-    // [
-    //     {
-    //         id: 1,
-    //         title: 'coding',
-    //         completed: false
-    //     },
-    //     {
-    //         id: 2,
-    //         title: 'eat',
-    //         completed: false
-    //     },
-    //     {
-    //         id: 3005,
-    //         title: 'sleep',
-    //         completed: false
-    //     }
-
     useEffect(() => {
         console.log('useEffect');
     }, [ show, todoList ]);
     const handleShow = () => {
         setShow(!show);
-        // console.log(show);
-        // show = true
         console.log(show, 'change');
     };
 
@@ -42,12 +23,19 @@ const TodoPage = () => {
     };
 
     const handleAdd = () => {
-        console.log('add');
         setTodoList(prev => [ ...prev, {
             id: todoList.length === 0 ? 1 : todoList[ todoList.length - 1 ].id + 1,
             title: inputValue,
             completed: false
         } ]);
+    };
+
+    const handleEdit = (todoEdit) => {
+        console.log(todoEdit);
+        todoList.map(todo => {
+            if(todoEdit.id===todo.id) return todo.title= todoEdit.title
+        })
+        setTodoList([...todoList])
     };
 
     const handleDone = (id) => {
@@ -76,21 +64,19 @@ const TodoPage = () => {
     //     task();
     // }, []);
 
-    useEffect(()=>{
-        const myLocalStorage = JSON.parse(localStorage.getItem('tasks'))
+    useEffect(() => {
+        const myLocalStorage = JSON.parse(localStorage.getItem('tasks'));
         if (myLocalStorage === null) {
-            return localStorage.setItem('tasks', JSON.stringify(todoList))
+            return localStorage.setItem('tasks', JSON.stringify(todoList));
         }
-        if (myLocalStorage!==0) {
-            setTodoList(myLocalStorage)
+        if (myLocalStorage !== 0) {
+            setTodoList(myLocalStorage);
         }
-    },[])
+    }, []);
 
-    useEffect(()=>{
-        localStorage.setItem('tasks', JSON.stringify(todoList))
-    },[todoList])
-
-
+    useEffect(() => {
+        localStorage.setItem('tasks', JSON.stringify(todoList));
+    }, [ todoList ]);
 
 
     return (
@@ -101,7 +87,12 @@ const TodoPage = () => {
                     <h1>title</h1>
                 </Modal>
             }
-            <TodoList lists={todoList} handleDone={handleDone} handleDelete={handleDelete}/>
+            <TodoList
+                lists={todoList}
+                handleDone={handleDone}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+            />
         </div>
     );
 };

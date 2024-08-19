@@ -1,0 +1,14 @@
+.list {
+    width: 800px;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+}
+.user {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px red solid;
+    padding: 10px;
+}
